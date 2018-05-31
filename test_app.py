@@ -13,7 +13,7 @@ class FlaskTestCase(unittest.TestCase):
         response = tester.get('/api/v1/users/requests', content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
-    
+
     def test_get_one_request(self):
         """test get single request"""
 
@@ -21,15 +21,15 @@ class FlaskTestCase(unittest.TestCase):
         response = tester.get('/api/v1/users/requests/1')
         self.assertEqual(response.status_code, 200)
 
-    
-    def test_one_request_not_found(self):
+
+    def test_get_one_request_failed(self):
         """test single request not found"""
-        
+
         tester = APP.test_client(self)
         response = tester.get('/api/v1/users/requests/12')
         self.assertIn(b"Request not found!", response.data)
 
-    def test_get_one_request(self):
+    def test_modify_one_request(self):
         """test get one request"""
 
         tester = APP.test_client(self)
@@ -41,8 +41,8 @@ class FlaskTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Request modified succesfully", response.data)
-    
-    def test_failed_get_one_request(self):
+
+    def test_modify_one_request_failed(self):
         """test not found request to modify"""
 
         tester = APP.test_client(self)
