@@ -24,6 +24,20 @@ def get_one_request(request_id):
         return jsonify({'request':request_found[0]})
     return "Request not found!"
 
+
+@APP.route('/api/v1/users/requests/<request_id>', methods=['PUT'])
+def modify_request(request_id):
+    """ modifies a request """
+
+    request_to_be_modified = [request for request in REQUESTS if request['id'] == int(request_id)]
+
+    if request_to_be_modified:
+        request_to_be_modified[0]['request'] = request.json['request']
+        return "Request modified succesfully"
+
+    return "Request not found!"
+
+
 if __name__ == '__main__':
     APP.run(debug=True)
     
