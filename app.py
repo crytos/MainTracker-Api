@@ -38,6 +38,27 @@ def modify_request(request_id):
     return "Request not found!"
 
 
+@APP.route('/api/v1/users/requests', methods=['POST'])
+def create_new_request():
+    """ adds a new request """
+
+    if request.json['request'] and request.json['user']:
+
+        request_to_be_added = {
+            'id':5,
+            'date':'2018-9-12',
+            'request':request.json['request'],
+            'status':request.json['status'],
+            'user':request.json['user']
+        }
+
+        REQUESTS.append(request_to_be_added)
+        return "Request added!"
+
+    return "Invalid request"
+
+
+#run the app
 if __name__ == '__main__':
     APP.run(debug=True)
     
