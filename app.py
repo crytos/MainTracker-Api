@@ -1,5 +1,5 @@
 """app.py"""
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 APP = Flask(__name__)
 
@@ -13,6 +13,16 @@ REQUESTS = [{'id':1, 'date':'2018-8-12', 'request':'Request1', 'status':'pending
 def get_all_requests():
     """ Returns all requests """
     return jsonify({'requests':REQUESTS, 'version':'1'})
+
+
+@APP.route('/api/v1/users/requests/<request_id>', methods=['GET'])
+def get_one_request(request_id):
+    """ Returns single request """
+    request_found = [request for request in REQUESTS if request['id'] == int(request_id)]
+
+    if request_found:
+        return jsonify({'request':request_found[0]})
+    return "Request not found!"
 
 if __name__ == '__main__':
     APP.run(debug=True)
