@@ -18,3 +18,5 @@ pytest==3.6.0
 six==1.11.0
 Werkzeug==0.14.1
 wrapt==1.10.11
+pytest-cov
+coveralls
