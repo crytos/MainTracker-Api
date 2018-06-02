@@ -5,6 +5,5 @@ install:
     - pip install -r requirements.txt
 script:
     - pytest test_app.py
-    - python setup.py install
 after_success:
     - coveralls
