@@ -1,12 +1,16 @@
 language: python
+# python versions to use during the tests
 python:
- - "3.6"
-install: pip install -r requirements.txt
-script: pytest test_app.py
-before_install:
-    - pip install pytest pytest-cov
-    - pip install coveralls
+    - "3.6"
+# command to install dependencies
+install:
+    - pip install -r requirements.txt
+# command to run tests
 script:
     - pytest test_app.py
+    - py.test --cov-report term-missing --cov=maths
+    - py.test --doctest-modules --cov=maths3 --cov-report term-missing
+#    - py.test
+
 after_success:
     - coveralls
